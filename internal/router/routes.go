@@ -1,10 +1,10 @@
 package router
 
 import (
-	"github.com/MarcelloBB/gin-boilerplate/controller"
 	"github.com/MarcelloBB/gin-boilerplate/docs"
-	"github.com/MarcelloBB/gin-boilerplate/repository"
-	"github.com/MarcelloBB/gin-boilerplate/usecase"
+	"github.com/MarcelloBB/gin-boilerplate/internal/controller"
+	"github.com/MarcelloBB/gin-boilerplate/internal/repository"
+	"github.com/MarcelloBB/gin-boilerplate/internal/usecase"
 	"github.com/gin-gonic/gin"
 	swaggerFiles "github.com/swaggo/files"
 	ginSwagger "github.com/swaggo/gin-swagger"

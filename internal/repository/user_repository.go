@@ -3,7 +3,7 @@ package repository
 import (
 	"fmt"
 
-	"github.com/MarcelloBB/gin-boilerplate/model"
+	"github.com/MarcelloBB/gin-boilerplate/internal/model"
 	"gorm.io/gorm"
 )
 
