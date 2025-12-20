@@ -15,7 +15,7 @@ func ConnectDB() (*gorm.DB, error) {
 	port := config.LoadConfigIni("db", "port", 5432).(int)
 	dbname := config.LoadConfigIni("db", "name", "postgres").(string)
 	user := config.LoadConfigIni("db", "user", "postgres").(string)
-	pwd := config.LoadConfigIni("db", "password", "1234").(string)
+	pwd := config.LoadConfigIni("db", "password", "").(string)
 
 	psqlInfo := fmt.Sprintf("host=%s port=%d user=%s "+
 		"password=%s dbname=%s sslmode=disable",
@@ -40,7 +40,7 @@ func ConnectDB() (*gorm.DB, error) {
 	fmt.Println("Connected to " + dbname)
 	fmt.Println("Running automigration...")
 
-	err = db.AutoMigrate(&model.Client{}, &model.User{}, &model.Product{})
+	err = db.AutoMigrate(&model.User{})
 	if err != nil {
 		fmt.Println("Error running automigration:", err)
 		panic(err)

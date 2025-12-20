@@ -18,9 +18,9 @@ services:
     ports:
       - "6379:6379"
 
-  go_db:
-    container_name: go_db
+  postgres:
     image: postgres:12
+    container_name: postgres
     environment:
       POSTGRES_PASSWORD: 1234
       POSTGRES_USER: postgres

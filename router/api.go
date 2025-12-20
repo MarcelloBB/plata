@@ -9,15 +9,16 @@ import (
 )
 
 func InitRouter() *gin.Engine {
-	server := gin.Default()
+	db.InitRedis()
 
-	apiPort := fmt.Sprintf(":%d", config.LoadConfigIni("server", "port", 8080).(int))
 	dbConnection, err := db.ConnectDB()
-
 	if err != nil {
 		fmt.Println("Error connecting to the database:", err)
 	}
 
+	apiPort := fmt.Sprintf(":%d", config.LoadConfigIni("server", "port", 8080).(int))
+
+	server := gin.Default()
 	RegisterRoutes(server, dbConnection)
 	server.Run(apiPort)
 

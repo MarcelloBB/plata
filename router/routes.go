@@ -12,26 +12,17 @@ import (
 )
 
 func RegisterRoutes(r *gin.Engine, dbConnection *gorm.DB) {
-	// Initialize repository
-	ProductRepository := repository.NewProductRepository(dbConnection)
 	UserRepository := repository.NewUserRepository(dbConnection)
-
-	// Initialize use cases
-	ProductUseCase := usecase.NewProductUseCase(ProductRepository)
 	UserUseCase := usecase.NewUserUseCase(UserRepository)
-
-	// Initialize controllers
-	ProductController := controller.NewProductController(ProductUseCase)
 	UserController := controller.NewUserController(UserUseCase)
 
-	basePath := "/api/v1"
+	basePath := "/api"
 	docs.SwaggerInfo.BasePath = basePath
 
-	// @BasePath /api/v1
+	// @BasePath /api/
 	api := r.Group(basePath)
 	{
 		api.GET("/user", UserController.GetUsers)
-		api.GET("/product", ProductController.GetProducts)
 	}
 
 	// Swagger docs

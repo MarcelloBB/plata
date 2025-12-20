@@ -12,9 +12,14 @@ import (
 var (
 	Ctx         = context.Background()
 	RedisClient *redis.Client
+	enabled     = config.LoadConfigIni("redis", "enabled", false).(bool)
 )
 
 func InitRedis() {
+	if !enabled {
+		fmt.Println("WARN - Redis cache is disabled in configuration")
+		return
+	}
 	RedisClient = redis.NewClient(&redis.Options{
 		Addr:     config.LoadConfigIni("redis", "host", "localhost:6379").(string),
 		Password: config.LoadConfigIni("redis", "password", "").(string),
@@ -28,6 +33,9 @@ func InitRedis() {
 }
 
 func SetCacheValue(ctx context.Context, key string, value interface{}) error {
+	if !enabled || RedisClient == nil {
+		return nil
+	}
 	expiration := time.Duration(config.LoadConfigIni("redis", "expiration", 10).(int)) * time.Minute
 	err := RedisClient.Set(Ctx, key, value, expiration).Err()
 	if err != nil {
@@ -38,6 +46,9 @@ func SetCacheValue(ctx context.Context, key string, value interface{}) error {
 }
 
 func GetCacheValue(ctx context.Context, key string) (string, error) {
+	if !enabled || RedisClient == nil {
+		return "", nil
+	}
 	value, err := RedisClient.Get(Ctx, key).Result()
 	if err != nil {
 		fmt.Println("Error getting value:", err)
