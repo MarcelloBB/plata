@@ -1,8 +1,8 @@
 package main
 
 import (
-	"github.com/MarcelloBB/gin-boilerplate/internal/config"
-	"github.com/MarcelloBB/gin-boilerplate/internal/router"
+	"github.com/MarcelloBB/plata/internal/config"
+	"github.com/MarcelloBB/plata/internal/router"
 )
 
 func main() {

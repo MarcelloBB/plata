@@ -3,8 +3,8 @@ package db
 import (
 	"fmt"
 
-	"github.com/MarcelloBB/gin-boilerplate/internal/config"
-	"github.com/MarcelloBB/gin-boilerplate/internal/model"
+	"github.com/MarcelloBB/plata/internal/config"
+	"github.com/MarcelloBB/plata/internal/model"
 	_ "github.com/lib/pq"
 	"gorm.io/driver/postgres"
 	"gorm.io/gorm"

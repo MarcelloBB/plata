@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"time"
 
-	"github.com/MarcelloBB/gin-boilerplate/internal/config"
+	"github.com/MarcelloBB/plata/internal/config"
 	"github.com/redis/go-redis/v9"
 )
 

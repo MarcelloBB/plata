@@ -1,8 +1,8 @@
 package usecase
 
 import (
-	"github.com/MarcelloBB/gin-boilerplate/internal/model"
-	"github.com/MarcelloBB/gin-boilerplate/internal/repository"
+	"github.com/MarcelloBB/plata/internal/model"
+	"github.com/MarcelloBB/plata/internal/repository"
 )
 
 type UserUseCase struct {

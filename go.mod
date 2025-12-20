@@ -1,4 +1,4 @@
-module github.com/MarcelloBB/gin-boilerplate
+module github.com/MarcelloBB/plata
 
 go 1.24.2
 

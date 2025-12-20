@@ -3,7 +3,7 @@ package controller
 import (
 	"net/http"
 
-	"github.com/MarcelloBB/gin-boilerplate/internal/usecase"
+	"github.com/MarcelloBB/plata/internal/usecase"
 	"github.com/gin-gonic/gin"
 )
 
