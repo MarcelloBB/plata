@@ -52,6 +52,10 @@ const docTemplate = `{
         "model.User": {
             "type": "object",
             "properties": {
+                "bio": {
+                    "description": "example: Just a regular user.",
+                    "type": "string"
+                },
                 "email": {
                     "description": "example: foo@bar.com",
                     "type": "string"

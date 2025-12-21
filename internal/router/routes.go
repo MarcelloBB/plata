@@ -16,6 +16,10 @@ func RegisterRoutes(r *gin.Engine, dbConnection *gorm.DB) {
 	UserUseCase := usecase.NewUserUseCase(UserRepository)
 	UserController := controller.NewUserController(UserUseCase)
 
+	TransactionRepository := repository.NewTransactionRepository(dbConnection)
+	TransactionUseCase := usecase.NewTransactionUseCase(TransactionRepository)
+	TransactionController := controller.NewTransactionController(TransactionUseCase)
+
 	basePath := "/api"
 	docs.SwaggerInfo.BasePath = basePath
 
@@ -23,6 +27,7 @@ func RegisterRoutes(r *gin.Engine, dbConnection *gorm.DB) {
 	api := r.Group(basePath)
 	{
 		api.GET("/user", UserController.GetUsers)
+		api.GET("/transaction", TransactionController.GetTransactions)
 	}
 
 	// Swagger docs
