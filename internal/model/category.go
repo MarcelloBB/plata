@@ -9,5 +9,5 @@ type Category struct {
 	UserID int  `gorm:"not null;index" json:"user_id"`
 	User   User `gorm:"foreignKey:UserID" json:"-"`
 
-	Budget Budget `gorm:"foreignKey:CategoryBudget" json:"budget"`
+	// Budget Budget `gorm:"foreignKey:CategoryBudget" json:"budget"`
 }

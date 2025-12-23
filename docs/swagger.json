@@ -4,6 +4,38 @@
         "contact": {}
     },
     "paths": {
+        "/transaction": {
+            "get": {
+                "description": "Returns a list of transactions",
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "transaction"
+                ],
+                "summary": "List transactions",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/model.Transaction"
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "type": "object",
+                            "additionalProperties": {
+                                "type": "string"
+                            }
+                        }
+                    }
+                }
+            }
+        },
         "/user": {
             "get": {
                 "description": "Returns a list of users",
@@ -34,10 +66,81 @@
                         }
                     }
                 }
+            },
+            "post": {
+                "description": "Post an user",
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "user"
+                ],
+                "summary": "Post users",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/model.User"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "type": "object",
+                            "additionalProperties": {
+                                "type": "string"
+                            }
+                        }
+                    }
+                }
             }
         }
     },
     "definitions": {
+        "model.Transaction": {
+            "type": "object",
+            "properties": {
+                "amount": {
+                    "description": "example: 100.50",
+                    "type": "number"
+                },
+                "date": {
+                    "description": "example: 2024-01-15T14:30:00Z",
+                    "type": "string"
+                },
+                "description": {
+                    "description": "example: Payment for services",
+                    "type": "string"
+                },
+                "id": {
+                    "description": "example: 1",
+                    "type": "integer"
+                },
+                "type": {
+                    "description": "example: expense",
+                    "allOf": [
+                        {
+                            "$ref": "#/definitions/model.TransactionType"
+                        }
+                    ]
+                },
+                "user_id": {
+                    "description": "example: 1",
+                    "type": "integer"
+                }
+            }
+        },
+        "model.TransactionType": {
+            "type": "string",
+            "enum": [
+                "expense",
+                "income"
+            ],
+            "x-enum-varnames": [
+                "Expense",
+                "Income"
+            ]
+        },
         "model.User": {
             "type": "object",
             "properties": {

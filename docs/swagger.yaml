@@ -1,4 +1,34 @@
 definitions:
+  model.Transaction:
+    properties:
+      amount:
+        description: 'example: 100.50'
+        type: number
+      date:
+        description: 'example: 2024-01-15T14:30:00Z'
+        type: string
+      description:
+        description: 'example: Payment for services'
+        type: string
+      id:
+        description: 'example: 1'
+        type: integer
+      type:
+        allOf:
+        - $ref: '#/definitions/model.TransactionType'
+        description: 'example: expense'
+      user_id:
+        description: 'example: 1'
+        type: integer
+    type: object
+  model.TransactionType:
+    enum:
+    - expense
+    - income
+    type: string
+    x-enum-varnames:
+    - Expense
+    - Income
   model.User:
     properties:
       bio:
@@ -17,6 +47,27 @@ definitions:
 info:
   contact: {}
 paths:
+  /transaction:
+    get:
+      description: Returns a list of transactions
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/model.Transaction'
+            type: array
+        "500":
+          description: Internal Server Error
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      summary: List transactions
+      tags:
+      - transaction
   /user:
     get:
       description: Returns a list of users
@@ -36,6 +87,24 @@ paths:
               type: string
             type: object
       summary: List users
+      tags:
+      - user
+    post:
+      description: Post an user
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/model.User'
+        "500":
+          description: Internal Server Error
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      summary: Post users
       tags:
       - user
 swagger: "2.0"

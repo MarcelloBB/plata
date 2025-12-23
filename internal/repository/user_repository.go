@@ -27,3 +27,12 @@ func (p *UserRepository) GetUsers() ([]model.User, error) {
 
 	return users, nil
 }
+
+func (p *UserRepository) CreateUser(user model.User) (model.User, error) {
+	err := p.connection.Create(&user).Error
+	if err != nil {
+		return model.User{}, err
+	}
+
+	return user, nil
+}

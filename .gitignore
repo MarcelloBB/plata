@@ -39,3 +39,5 @@ Thumbs.db
 
 # Go build cache (opcional, geralmente fora do projeto)
 **/go.sum
+
+todo.md

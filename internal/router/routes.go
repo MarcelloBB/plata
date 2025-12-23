@@ -27,6 +27,8 @@ func RegisterRoutes(r *gin.Engine, dbConnection *gorm.DB) {
 	api := r.Group(basePath)
 	{
 		api.GET("/user", UserController.GetUsers)
+		api.POST("/user", UserController.PostUser)
+
 		api.GET("/transaction", TransactionController.GetTransactions)
 	}
 
