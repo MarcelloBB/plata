@@ -53,7 +53,7 @@ func (uc *TransactionController) PostTransactions(c *gin.Context) {
 
 	transaction, err := uc.transactionUseCase.CreateTransaction(newTransaction)
 	if err != nil {
-		c.JSON(http.StatusInternalServerError, gin.H{"error": "Failed to fetch transactions"})
+		c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
 		return
 	}
 

@@ -2,11 +2,11 @@ package usecase
 
 import (
 	"fmt"
-	"time"
 
 	"github.com/MarcelloBB/plata/internal/dto"
 	"github.com/MarcelloBB/plata/internal/model"
 	"github.com/MarcelloBB/plata/internal/repository"
+	"github.com/MarcelloBB/plata/internal/utils"
 )
 
 type TransactionUseCase struct {
@@ -24,20 +24,16 @@ func (p *TransactionUseCase) GetTransactions() ([]model.Transaction, error) {
 }
 
 func (p *TransactionUseCase) CreateTransaction(transaction dto.CreateTransactionRequest) (dto.TransactionResponse, error) {
-	transactionDate := transaction.Date
-	if transactionDate == "" {
-		transactionDate = time.Now().Format(time.RFC3339)
-	}
-	parsedDate, err := time.Parse(time.RFC3339, transactionDate)
-	if err != nil {
-		return dto.TransactionResponse{}, fmt.Errorf("invalid date format: %w", err)
+	transactionDate, transactionDateStr, parseDateErr := utils.NormalizeDate(transaction.Date)
+	if parseDateErr != nil {
+		return dto.TransactionResponse{}, fmt.Errorf("invalid date: %w", parseDateErr)
 	}
 
 	newTransaction := model.Transaction{
 		UserID:      transaction.UserID,
 		Amount:      transaction.Amount,
 		Description: transaction.Description,
-		Date:        parsedDate,
+		Date:        transactionDate,
 		Type:        model.TransactionType(transaction.Type),
 	}
 
@@ -51,7 +47,7 @@ func (p *TransactionUseCase) CreateTransaction(transaction dto.CreateTransaction
 		UserID:      createdTransaction.UserID,
 		Amount:      createdTransaction.Amount,
 		Description: createdTransaction.Description,
-		Date:        createdTransaction.Date.Format(time.RFC3339),
+		Date:        transactionDateStr,
 		Type:        string(createdTransaction.Type),
 	}
 
