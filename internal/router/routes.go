@@ -30,6 +30,7 @@ func RegisterRoutes(r *gin.Engine, dbConnection *gorm.DB) {
 		api.POST("/user", UserController.PostUser)
 
 		api.GET("/transaction", TransactionController.GetTransactions)
+		api.POST("/transaction", TransactionController.PostTransactions)
 	}
 
 	// Swagger docs

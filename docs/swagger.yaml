@@ -68,6 +68,24 @@ paths:
       summary: List transactions
       tags:
       - transaction
+    post:
+      description: Create a transaction
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/model.Transaction'
+        "500":
+          description: Internal Server Error
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      summary: Create transaction
+      tags:
+      - transaction
   /user:
     get:
       description: Returns a list of users

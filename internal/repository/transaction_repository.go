@@ -27,3 +27,12 @@ func (p *TransactionRepository) GetTransactions() ([]model.Transaction, error) {
 
 	return transactions, nil
 }
+
+func (p *TransactionRepository) CreateTransaction(transaction model.Transaction) (model.Transaction, error) {
+	err := p.connection.Create(&transaction).Error
+	if err != nil {
+		return model.Transaction{}, err
+	}
+
+	return transaction, nil
+}

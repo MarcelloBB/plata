@@ -3,6 +3,7 @@ package controller
 import (
 	"net/http"
 
+	"github.com/MarcelloBB/plata/internal/dto"
 	"github.com/MarcelloBB/plata/internal/usecase"
 	"github.com/gin-gonic/gin"
 )
@@ -32,4 +33,29 @@ func (uc *TransactionController) GetTransactions(c *gin.Context) {
 		return
 	}
 	c.JSON(http.StatusOK, transactions)
+}
+
+// PostTransactions godoc
+// @Summary      Create transaction
+// @Description  Create a transaction
+// @Tags         transaction
+// @Produce      json
+// @Success      200  {object}   model.Transaction
+// @Failure      500  {object}  map[string]string
+// @Router       /transaction [post]
+func (uc *TransactionController) PostTransactions(c *gin.Context) {
+	var newTransaction dto.CreateTransactionRequest
+
+	if err := c.ShouldBindJSON(&newTransaction); err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+		return
+	}
+
+	transaction, err := uc.transactionUseCase.CreateTransaction(newTransaction)
+	if err != nil {
+		c.JSON(http.StatusInternalServerError, gin.H{"error": "Failed to fetch transactions"})
+		return
+	}
+
+	c.JSON(http.StatusCreated, transaction)
 }
