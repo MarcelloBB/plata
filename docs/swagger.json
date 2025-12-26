@@ -4,6 +4,65 @@
         "contact": {}
     },
     "paths": {
+        "/category": {
+            "get": {
+                "description": "Returns a list of categories",
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "category"
+                ],
+                "summary": "List categories",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/model.Category"
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "type": "object",
+                            "additionalProperties": {
+                                "type": "string"
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "description": "Post an category",
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "category"
+                ],
+                "summary": "Post categories",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/model.Category"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "type": "object",
+                            "additionalProperties": {
+                                "type": "string"
+                            }
+                        }
+                    }
+                }
+            }
+        },
         "/transaction": {
             "get": {
                 "description": "Returns a list of transactions",
@@ -124,6 +183,23 @@
         }
     },
     "definitions": {
+        "model.Category": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "description": "example: 1",
+                    "type": "integer"
+                },
+                "name": {
+                    "description": "example: Groceries",
+                    "type": "string"
+                },
+                "user_id": {
+                    "description": "example: 1",
+                    "type": "integer"
+                }
+            }
+        },
         "model.Transaction": {
             "type": "object",
             "properties": {
