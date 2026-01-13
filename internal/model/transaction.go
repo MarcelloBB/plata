@@ -15,6 +15,9 @@ type Transaction struct {
 	// example: 1
 	UserID int  `gorm:"not null;index" json:"user_id"`
 	User   User `gorm:"foreignKey:UserID" json:"-"`
+	// example: 1
+	CategoryID int      `gorm:"index" json:"category_id"`
+	Category   Category `gorm:"foreignKey:CategoryID" json:"-"`
 	// example: 100.50
 	Amount float64 `json:"amount"`
 	// example: Payment for services
