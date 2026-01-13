@@ -218,6 +218,10 @@ const docTemplate = `{
                     "description": "example: 100.50",
                     "type": "number"
                 },
+                "category_id": {
+                    "description": "example: 1",
+                    "type": "integer"
+                },
                 "date": {
                     "description": "example: 2024-01-15T14:30:00Z",
                     "type": "string"

@@ -31,6 +31,7 @@ func (p *TransactionUseCase) CreateTransaction(transaction dto.CreateTransaction
 
 	newTransaction := model.Transaction{
 		UserID:      transaction.UserID,
+		CategoryID:  transaction.CategoryId,
 		Amount:      transaction.Amount,
 		Description: transaction.Description,
 		Date:        transactionDate,
@@ -45,6 +46,7 @@ func (p *TransactionUseCase) CreateTransaction(transaction dto.CreateTransaction
 	response := dto.TransactionResponse{
 		ID:          createdTransaction.ID,
 		UserID:      createdTransaction.UserID,
+		CategoryId:  createdTransaction.CategoryID,
 		Amount:      createdTransaction.Amount,
 		Description: createdTransaction.Description,
 		Date:        transactionDateStr,

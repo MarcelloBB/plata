@@ -2,6 +2,7 @@ package dto
 
 type CreateTransactionRequest struct {
 	UserID      int     `json:"user_id" binding:"required"`
+	CategoryId  int     `json:"category_id"`
 	Amount      float64 `json:"amount" binding:"required"` // greater than 0
 	Description string  `json:"description" binding:"required,max=75"`
 	Date        string  `json:"date"`
@@ -11,6 +12,7 @@ type CreateTransactionRequest struct {
 type TransactionResponse struct {
 	ID          int     `json:"id"`
 	UserID      int     `json:"user_id"`
+	CategoryId  int     `json:"category_id"`
 	Amount      float64 `json:"amount"`
 	Description string  `json:"description"`
 	Date        string  `json:"date"`
